@@ -8,9 +8,10 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.anuj.maven.orders.Order;
+import com.anuj.maven.orders.PackingSlip;
 
 @Component
-public class OrdersDao {
+public class PackingSlipDao {
 	
 private NamedParameterJdbcTemplate jdbc;
 	
@@ -20,11 +21,15 @@ private NamedParameterJdbcTemplate jdbc;
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
 	
-	public  boolean create(Order order) {
-		
-		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(order);
 	
-		return jdbc.update("INSERT into orders (id,entity,email,payment) VALUES (:id,:entity,:email,:payment)", params) == 1;
+public  boolean postSlip(PackingSlip slip) {
+	
+	
+		
+		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(slip);
+	
+		return jdbc.update("INSERT into packing_slip (message,orders_id) VALUES (:message,:id)", params) == 1;
 	}
+
 
 }

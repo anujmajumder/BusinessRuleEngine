@@ -15,6 +15,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.anuj.maven.orders.Order;
+import com.anuj.maven.orders.PackingSlip;
+import com.anuj.maven.orders.dao.PackingSlipDao;
 
 @Component
 public class BusinessRules {
@@ -26,6 +28,12 @@ private NamedParameterJdbcTemplate jdbc;
 	public void setDataSource(DataSource jdbc) {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
+	
+	@Autowired
+	PackingSlip pslip;
+	
+	@Autowired
+	PackingSlipDao slip;
 
 	public String process(String entity) {
 		
@@ -59,31 +67,37 @@ private NamedParameterJdbcTemplate jdbc;
 		List<String> actionsList = new ArrayList<String>();
 		String[] items = actions.split(",");
 		
-		for(String a : items)
-		{
-			System.out.println(a);
-		}
-		
 		actionsList = Arrays.asList(items);
 		
 		
 		System.out.println(actionsList.toString());
 		
-		List<String> result = actionsList.stream().map(act -> resolver(act)).collect(Collectors.toList());
+		List<Boolean> result = actionsList.stream().map(act -> resolver(order,act)).collect(Collectors.toList());
 		
-		System.out.println(result.toString());
+		if(result.contains(false))
+		{
+		 return false;	
+		}
 		
 		
 		return true;
 	}
 
 
-	private String resolver(String act) {
+	public boolean resolver(Order order,String act) {
 		
+		boolean post=false;
 		
+		if(act.equals("shipping")|| act.equals("royalty department"))
+		{
+			pslip.generateSlip(act,order.getId());
+			 post = slip.postSlip(pslip);
+			
+			
+		}
 
 		
-		return act;
+		return post;
 	}
 
 }

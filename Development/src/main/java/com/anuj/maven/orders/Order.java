@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Order {
 	
-	
+	int id;
 	String entity;
 	String email;
 	double payment;
@@ -14,12 +14,23 @@ public class Order {
 		super();
 	}
 	
-	public Order(String entity, String email, Double payment) {
+	public Order(int id, String entity, String email, Double payment) {
 		
+		this.id=id;
 		this.entity=entity;
 		this.email=email;
 		this.payment=payment;
 	}
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getEntity() {
 		return entity;
 	}
