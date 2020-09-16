@@ -3,6 +3,7 @@ package com.anuj.maven.orders.rules;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,9 @@ private NamedParameterJdbcTemplate jdbc;
 	}
 
 	public String process(String entity) {
+		
+		try
+		{
 
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("entity", entity);
@@ -30,6 +34,15 @@ private NamedParameterJdbcTemplate jdbc;
 		System.out.println("action  is :"+action);
 		
 		return action;
+		}
+		catch(EmptyResultDataAccessException e)
+		{
+			return null;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
 		
 	}
 
