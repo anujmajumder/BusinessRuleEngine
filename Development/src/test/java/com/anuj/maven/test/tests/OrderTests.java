@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.anuj.maven.orders.Order;
 import com.anuj.maven.orders.dao.OrdersDao;
 
-@ContextConfiguration(locations = { 
+@ContextConfiguration(locations = { "classpath:com/anuj/maven/orders/beans/bean-context.xml",
 		"classpath:com/anuj/maven/test/config/datasource.xml" })
 
 

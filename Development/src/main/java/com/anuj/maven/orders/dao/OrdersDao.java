@@ -24,7 +24,7 @@ private NamedParameterJdbcTemplate jdbc;
 		
 		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(order);
 	
-		return jdbc.update("INSERT into order (entity,email,payment) VALUES (:entity,:email,:payment)", params) == 1;
+		return jdbc.update("INSERT into orders (entity,email,payment) VALUES (:entity,:email,:payment)", params) == 1;
 	}
 
 }
