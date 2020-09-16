@@ -46,8 +46,9 @@ public class OrderTests {
 	{
 		JdbcTemplate jdbc = new JdbcTemplate(datasource);
 		
-		jdbc.execute("delete from orders");
 		jdbc.execute("delete from packing_slip");
+		jdbc.execute("delete from orders");
+		
 		
 	
 		
@@ -58,11 +59,11 @@ public class OrderTests {
 	{
 		//assertEquals("Dummy", 1,1);
 		
-		Order order = new Order(123,"product","anuj.majumde@gmail.com",new Double(26600));
+		Order order = new Order(123,"book","anuj.majumde@gmail.com",new Double(26600));
 		
-		assertTrue("method should return true", orderdao.create(order));
+		//assertTrue("method should return true", orderdao.create(order));
 		
-		//assertTrue("method should return true", orderservice.createOrder(order));
+		assertTrue("method should return true", orderservice.createOrder(order));
 		
 		//assertEquals("should be equal", "packing slip", br.process(order.getEntity()));
 		
@@ -70,7 +71,9 @@ public class OrderTests {
 		
 		//assertTrue("should be true",br.actionProcess(order,action ));
 		
-		assertTrue("should return true",br.resolver(order, "shipping") );
+		//assertTrue("should return true",br.resolver(order, "shipping") );
+		
+		//assertTrue("should return true",br.resolver(order, "shipping") );
 
 }
 	

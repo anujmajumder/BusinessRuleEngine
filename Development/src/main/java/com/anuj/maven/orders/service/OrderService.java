@@ -24,8 +24,11 @@ public class OrderService {
 		if(createResponse == true)
 		{
 			String actions = bizrules.process(order.getEntity());
+			if(actions != null)
+			{
 			boolean actionResponse = bizrules.actionProcess(order,actions);
-			
+			return actionResponse;
+			}
 			
 		}
 		
