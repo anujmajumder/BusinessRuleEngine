@@ -102,6 +102,13 @@ private NamedParameterJdbcTemplate jdbc;
 		{
 			post = user.membership(order.getEmail());
 		}
+		if(act.equals("video"))
+		{
+			pslip.generateSlip(act,order.getId());
+			 post = slip.postSlip(pslip);
+			
+		}
+		
 
 		
 		return post;

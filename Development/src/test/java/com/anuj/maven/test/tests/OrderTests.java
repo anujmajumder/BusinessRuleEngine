@@ -65,7 +65,7 @@ public class OrderTests {
 	{
 		//assertEquals("Dummy", 1,1);
 		
-		Order order = new Order(123,"book","anuj.majumder@gmail.com",new Double(26600));
+		Order order = new Order(123,"video","anuj.majumder@gmail.com",new Double(26600));
 		
 		Order order1 = new Order(123,"create membership","anuj.majumder@gmail.com",new Double(26600));
 		
@@ -74,7 +74,10 @@ public class OrderTests {
 		//assertTrue("method should return true", orderdao.create(order));
 		assertTrue("should be equal", userdao.userInsert(user) );
 		
-		assertTrue("method should return true", orderservice.createOrder(order1));
+		assertTrue("method should return true", orderservice.createOrder(order));
+		
+		
+		//assertTrue("method should return true", orderservice.createOrder(order1));
 		
 		
 		
