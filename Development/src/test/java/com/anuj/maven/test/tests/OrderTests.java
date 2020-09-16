@@ -1,5 +1,8 @@
 package com.anuj.maven.test.tests;
 
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import javax.sql.DataSource;
@@ -14,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.anuj.maven.orders.Order;
 import com.anuj.maven.orders.dao.OrdersDao;
+import com.anuj.maven.orders.rules.BusinessRules;
 import com.anuj.maven.orders.service.OrderService;
 
 @ContextConfiguration(locations = { "classpath:com/anuj/maven/orders/beans/bean-context.xml",
@@ -32,6 +36,9 @@ public class OrderTests {
 
 	@Autowired
 	private DataSource datasource;
+	
+	@Autowired
+	BusinessRules br;
 	
 	
 	@Before
@@ -55,6 +62,8 @@ public class OrderTests {
 		assertTrue("method should return true", orderdao.create(order));
 		
 		assertTrue("method should return true", orderservice.createOrder(order));
+		
+		assertEquals("should be equal", "packing slip", br.process(order.getEntity()));
 
 }
 	
