@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.anuj.maven.orders.Order;
 import com.anuj.maven.orders.dao.OrdersDao;
+import com.anuj.maven.orders.service.OrderService;
 
 @ContextConfiguration(locations = { "classpath:com/anuj/maven/orders/beans/bean-context.xml",
 		"classpath:com/anuj/maven/test/config/datasource.xml" })
@@ -23,6 +24,8 @@ import com.anuj.maven.orders.dao.OrdersDao;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class OrderTests {
 	
+	@Autowired
+	OrderService orderservice;
 	
 	@Autowired
 	OrdersDao orderdao;
@@ -36,7 +39,7 @@ public class OrderTests {
 	{
 		JdbcTemplate jdbc = new JdbcTemplate(datasource);
 		
-		//jdbc.execute("delete from order");
+		jdbc.execute("delete from orders");
 		
 	
 		
@@ -47,9 +50,11 @@ public class OrderTests {
 	{
 		//assertEquals("Dummy", 1,1);
 		
-		Order order = new Order("produc","anuj.majumde@gmail.com",new Double(26600));
+		Order order = new Order("product","anuj.majumde@gmail.com",new Double(26600));
 		
 		assertTrue("method should return true", orderdao.create(order));
+		
+		assertTrue("method should return true", orderservice.createOrder(order));
 
 }
 	
