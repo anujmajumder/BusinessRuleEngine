@@ -57,7 +57,7 @@ public class OrderTests {
 	{
 		//assertEquals("Dummy", 1,1);
 		
-		Order order = new Order("product","anuj.majumde@gmail.com",new Double(26600));
+		Order order = new Order("produc","anuj.majumde@gmail.com",new Double(26600));
 		
 		assertTrue("method should return true", orderdao.create(order));
 		
