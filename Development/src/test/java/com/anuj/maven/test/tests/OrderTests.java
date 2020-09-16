@@ -16,7 +16,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.anuj.maven.orders.Order;
+import com.anuj.maven.orders.Users;
 import com.anuj.maven.orders.dao.OrdersDao;
+import com.anuj.maven.orders.dao.UsersDao;
 import com.anuj.maven.orders.rules.BusinessRules;
 import com.anuj.maven.orders.service.OrderService;
 
@@ -33,6 +35,9 @@ public class OrderTests {
 	
 	@Autowired
 	OrdersDao orderdao;
+	
+	@Autowired
+	UsersDao userdao;
 
 	@Autowired
 	private DataSource datasource;
@@ -48,6 +53,7 @@ public class OrderTests {
 		
 		jdbc.execute("delete from packing_slip");
 		jdbc.execute("delete from orders");
+		jdbc.execute("delete from users");
 		
 		
 	
@@ -61,9 +67,13 @@ public class OrderTests {
 		
 		Order order = new Order(123,"book","anuj.majumde@gmail.com",new Double(26600));
 		
+		Users user = new Users(1,"Anuj","anuj.majumder@gmail.com",null);
+		
 		//assertTrue("method should return true", orderdao.create(order));
 		
 		assertTrue("method should return true", orderservice.createOrder(order));
+		
+		assertTrue("should be equal", userdao.userInsert(user) );
 		
 		//assertEquals("should be equal", "packing slip", br.process(order.getEntity()));
 		

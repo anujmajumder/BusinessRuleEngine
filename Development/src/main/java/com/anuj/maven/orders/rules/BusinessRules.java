@@ -93,6 +93,9 @@ private NamedParameterJdbcTemplate jdbc;
 			pslip.generateSlip(act,order.getId());
 			 post = slip.postSlip(pslip);
 			
+		}
+		if(act.equals("activate"))
+		{
 			
 		}
 
