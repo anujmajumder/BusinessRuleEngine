@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +27,21 @@ private NamedParameterJdbcTemplate jdbc;
 		
 		return jdbc.update("INSERT into users (id,name,email,membership) VALUES (:id,:name,:email,:membership)", params) == 1;
 	
+	}
+
+	public boolean membership(String email) {
+
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("email", email);
+		
+		System.out.println("in memebership");
+		
+		
+		return jdbc.update("UPDATE users SET membership = 'UPGRADED' where email=:email ", params) == 1;
+		
+		
+		
+		
 	}
 
 }

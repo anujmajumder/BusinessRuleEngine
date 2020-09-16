@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import com.anuj.maven.orders.Order;
 import com.anuj.maven.orders.PackingSlip;
 import com.anuj.maven.orders.dao.PackingSlipDao;
+import com.anuj.maven.orders.dao.UsersDao;
 
 @Component
 public class BusinessRules {
@@ -34,6 +35,9 @@ private NamedParameterJdbcTemplate jdbc;
 	
 	@Autowired
 	PackingSlipDao slip;
+	
+	@Autowired
+	UsersDao user;
 
 	public String process(String entity) {
 		
@@ -96,7 +100,7 @@ private NamedParameterJdbcTemplate jdbc;
 		}
 		if(act.equals("activate"))
 		{
-			
+			post = user.membership(order.getEmail());
 		}
 
 		
