@@ -1,5 +1,11 @@
 package com.anuj.maven.orders.rules;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +13,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
+
+import com.anuj.maven.orders.Order;
 
 @Component
 public class BusinessRules {
@@ -44,6 +52,38 @@ private NamedParameterJdbcTemplate jdbc;
 			return null;
 		}
 		
+	}
+
+	public boolean actionProcess(Order order, String actions) {
+
+		List<String> actionsList = new ArrayList<String>();
+		String[] items = actions.split(",");
+		
+		for(String a : items)
+		{
+			System.out.println(a);
+		}
+		
+		actionsList = Arrays.asList(items);
+		
+		
+		System.out.println(actionsList.toString());
+		
+		List<String> result = actionsList.stream().map(act -> resolver(act)).collect(Collectors.toList());
+		
+		System.out.println(result.toString());
+		
+		
+		return true;
+	}
+
+
+	private String resolver(String act) {
+		
+		
+
+		
+		return act;
 	}
 
 }
