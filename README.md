@@ -4,13 +4,21 @@ Language : Java  version : Java 8
 
 This code will have a centralised Business rules Table which will have actions for each entity which will act as rules for that entity when it passes the application.
 
-BUSINESS RULES : 
-ENTITY                                ACTIONS
-book	                           shipping,royalty department
-create membership	               activateCreate,sendMail
-product	                         shipping
-upgrade membership	             activateUpdate,sendMail
-video	                           video
+BUSINESS RULES ->                                                                                                
+
+
+
+ENTITY                             ->                                                      ACTIONS                                                                           
+
+book	                            ->                              shipping,royalty department                           
+
+create membership	  ->             activateCreate,sendMail                                                           
+
+product	                ->         shipping                                                       
+
+upgrade membership	    ->         activateUpdate,sendMail                                                     
+
+video	                   ->        video                                                  
 
 As seen above Business Rules table.  This will allow the components to be mutually exclusive than being tightly coupled.
 Each Action can be added to any other entity for code reusability.
