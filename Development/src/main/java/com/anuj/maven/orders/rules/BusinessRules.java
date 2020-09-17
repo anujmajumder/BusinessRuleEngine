@@ -18,6 +18,7 @@ import com.anuj.maven.orders.Order;
 import com.anuj.maven.orders.PackingSlip;
 import com.anuj.maven.orders.dao.PackingSlipDao;
 import com.anuj.maven.orders.dao.UsersDao;
+import com.anuj.maven.orders.mail.Mail;
 
 @Component
 public class BusinessRules {
@@ -38,6 +39,9 @@ private NamedParameterJdbcTemplate jdbc;
 	
 	@Autowired
 	UsersDao user;
+	
+	@Autowired
+	Mail mail;
 
 	public String process(String entity) {
 		
