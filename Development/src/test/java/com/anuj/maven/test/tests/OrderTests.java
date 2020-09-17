@@ -65,31 +65,35 @@ public class OrderTests {
 	{
 		//assertEquals("Dummy", 1,1);
 		
-		Order order = new Order(123,"video","anuj.majumder@gmail.com",new Double(26600));
+		Order order = new Order(123,"video","anuj.majumder@gmail.com",new Double(589));
 		
-		Order order1 = new Order(123,"create membership","anuj.majumder@gmail.com",new Double(26600));
+		Order order1 = new Order(124,"create membership","anuj.majumder@gmail.com",new Double(26600));
 		
 		Users user = new Users(1,"Anuj","anuj.majumder@gmail.com",null);
 		
-		//assertTrue("method should return true", orderdao.create(order));
+		assertTrue("method should return true", orderdao.create(order));
 		assertTrue("should be equal", userdao.userInsert(user) );
 		
 		assertTrue("method should return true", orderservice.createOrder(order));
 		
 		
-		//assertTrue("method should return true", orderservice.createOrder(order1));
+		assertTrue("method should return true", orderservice.createOrder(order1));
 		
 		
 		
-		//assertEquals("should be equal", "packing slip", br.process(order.getEntity()));
+		assertEquals("should be equal", "video", br.process(order.getEntity()));
 		
 		String action = br.process(order.getEntity());
 		
-		//assertTrue("should be true",br.actionProcess(order,action ));
+		assertTrue("should be true",br.actionProcess(order,action ));
 		
-		//assertTrue("should return true",br.resolver(order, "shipping") );
+		assertTrue("should return true",br.resolver(order, "shipping") );
 		
-		//assertTrue("should return true",br.resolver(order, "shipping") );
+		assertTrue("should return true",br.resolver(order, "royalty department") );
+		
+		assertTrue("should return true",br.resolver(order, "activateCreate") );
+		
+		assertTrue("should return true",br.resolver(order, "activateUpgrade") );
 
 }
 	

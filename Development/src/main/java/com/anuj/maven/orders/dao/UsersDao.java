@@ -29,15 +29,30 @@ private NamedParameterJdbcTemplate jdbc;
 	
 	}
 
-	public boolean membership(String email) {
+	public boolean membershipUpgrade(String email) {
 
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("email", email);
 		
-		System.out.println("in memebership");
+		System.out.println("in  upgrade memebership");
 		
 		
 		return jdbc.update("UPDATE users SET membership = 'UPGRADED' where email=:email ", params) == 1;
+		
+		
+		
+		
+	}
+	
+	public boolean membershipCreate(String email) {
+
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("email", email);
+		
+		System.out.println("in create memebership");
+		
+		
+		return jdbc.update("UPDATE users SET membership = 'CREATED' where email=:email ", params) == 1;
 		
 		
 		

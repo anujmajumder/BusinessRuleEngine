@@ -102,9 +102,17 @@ private NamedParameterJdbcTemplate jdbc;
 			 post = slip.postSlip(pslip);
 			
 		}
-		if(act.equals("activate"))
+		if(act.equals("activateUpgrade"))
 		{
-			post = user.membership(order.getEmail());
+			post = user.membershipUpgrade(order.getEmail());
+			if(post)
+			mail.sendMail(order.getEmail(), "MEMBERSHIP UPGRADE", "Your membership has been upgraded");	
+		}
+		if(act.equals("activateCreate"))
+		{
+			post = user.membershipCreate(order.getEmail());
+			if(post)
+			mail.sendMail(order.getEmail(), "MEMBERSHIP CREATE", "Your membership has been created");
 		}
 		if(act.equals("video"))
 		{
